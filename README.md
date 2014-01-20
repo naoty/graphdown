@@ -1,29 +1,42 @@
 # Graphdown
 
-TODO: Write a gem description
+Markdown extension for embedding graphs.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'graphdown'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install graphdown
+```sh
+$ gem install graphdown
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+```rb
+renderer = Redcarpet::Render::HTML.new
+renderer.extend(Graphdown::Render)
+markdown = Redcarpet::Markdown.new(renderer, fenced_code_blocks: true)
+markdown.render(content)
+```
 
-## Contributing
+## Example
 
-1. Fork it ( http://github.com/<my-github-username>/graphdown/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+```md
+# Views transition
+
+\```dot
+diagraph sample {
+    A [label = "index.html"];
+    B [label = "show.html"];
+    C [label = "new.html"];
+
+    A -> B [dir = both];
+    A -> C;
+    C -> A [label = "redirect"];
+}
+\```
+
+- Users can visit show.html from index.html.
+- Users can visit index.html from show.html.
+- Users can visit new.html from index.html.
+- Users can redirect to index.html from new.html.
+```
+
