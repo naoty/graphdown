@@ -1,5 +1,5 @@
-require "graphdown/version"
+lib = File.dirname(__FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-module Graphdown
-  # Your code goes here...
-end
+require "redcarpet"
+require "graphdown/renderable"

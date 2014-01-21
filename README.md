@@ -11,9 +11,14 @@ $ gem install graphdown
 ## Usage
 
 ```rb
-renderer = Redcarpet::Render::HTML.new
-renderer.extend(Graphdown::Render)
-markdown = Redcarpet::Markdown.new(renderer, fenced_code_blocks: true)
+require "graphdown"
+
+class BaseRenderer < Redcarpet::Render::HTML
+  include Graphdown::Renderable
+  # include other extensions...
+end
+
+markdown = Redcarpet::Markdown.new(BaseRenderer, fenced_code_blocks: true)
 markdown.render(content)
 ```
 
