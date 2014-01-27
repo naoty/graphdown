@@ -1,10 +1,10 @@
 require "spec_helper"
 
 class BaseRenderer < Redcarpet::Render::HTML
-  include Graphdown::Renderable
+  include Graphdown::Renderable::DOT
 end
 
-describe Graphdown::Renderable do
+describe Graphdown::Renderable::DOT do
   let(:markdown) { Redcarpet::Markdown.new(BaseRenderer, fenced_code_blocks: true) }
   let(:fixtures_path) { Pathname.new("spec/fixtures") }
   let(:dot_path)      { Pathname.pwd.join("sample.dot") }
