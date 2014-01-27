@@ -1,2 +1,3 @@
-require "redcarpet"
-require "graphdown/renderable/dot"
+require "graphdown/renderable"
+require "graphdown/parser"
+require "graphdown/node"
