@@ -1,33 +1,28 @@
-require "svgen"
-
 module Graphdown
   class Parser
     def initialize
-      @nodes = []
+      @graph = Graph.new
     end
 
     def parse(text)
-      labels = text.scan(/(?<=\[).+?(?=\])/)
-      labels.each do |label|
-        @nodes << Node.new(label)
+      tokens = text.split(/\s+/)
+      tokens.each_with_index do |token, index|
+        next unless index > 0 && index % 2 == 0
+        origin = Node.new(tokens[index - 2].gsub(/\[(.+)\]/) { $1 })
+        target = Node.new(tokens[index].gsub(/\[(.+)\]/) { $1 })
+        case tokens[index - 1]
+        when "->"
+          origin.connect(target)
+        when "<->"
+          origin.connect(target, :two_way)
+        end
+        @graph << origin
+        @graph << target
       end
     end
 
     def output
-      svg = SVGen::SVG.new do |svg|
-        svg.g(fill: "none", stroke: "black") do |g|
-          @nodes.each_with_index do |node, index|
-            g.rect(x: 0, y: 0, width: node.width, height: node.height)
-          end
-        end
-
-        svg.g("font-size" => Node::FONT_SIZE, "font-family" => Node::FONT_FAMILY, "text-anchor" => "middle") do |g|
-          @nodes.each_with_index do |node, index|
-            g.text(node.label, x: node.width / 2, y: Node::WORD_HEIGHT + Node::PADDING_TOP / 2)
-          end
-        end
-      end
-      svg.generate
+      @graph.to_svg
     end
   end
 end

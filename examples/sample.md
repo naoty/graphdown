@@ -1,3 +1,3 @@
 # Sample markdown
 
-[/naoty/graphdown]
+[a] -> [b] <-> [c] -> [d]

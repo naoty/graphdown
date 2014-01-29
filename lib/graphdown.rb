@@ -1,3 +1,5 @@
 require "graphdown/renderable"
 require "graphdown/parser"
+require "graphdown/graph"
 require "graphdown/node"
+require "graphdown/edge"
