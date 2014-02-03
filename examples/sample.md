@@ -1,3 +1,6 @@
-# Sample markdown
+# Paths for my project on GitHub
 
-[a] -> [b] <-> [c] -> [d]
+[/] -> [/naoty] -> [/naoty/graphdown]
+[/] -> [/naoty/graphdown]
+[/] -> [/search] -> [/naoty/graphdown]
+[/] -> [/notifications] -> [/naoty/graphdown]

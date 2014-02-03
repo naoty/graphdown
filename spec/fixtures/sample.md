@@ -1,3 +1,1 @@
-# Sample markdown
-
-[a] -> [b]
+[a] -> [b] -> [c]

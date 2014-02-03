@@ -1,0 +1,12 @@
+<svg width="73" height="275" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="black">
+    <rect x="10" y="10" width="33" height="35"/>
+    <rect x="10" y="95" width="33" height="35"/>
+    <rect x="10" y="180" width="33" height="35"/>
+  </g>
+  <g font-size="18" font-family="monospace" text-anchor="middle">
+    <text x="26" y="37">a</text>
+    <text x="26" y="122">b</text>
+    <text x="26" y="207">c</text>
+  </g>
+</svg>

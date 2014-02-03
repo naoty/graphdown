@@ -8,6 +8,8 @@ module Graphdown
     WORD_HEIGHT = 25
     PADDING_TOP = 5
     PADDING_LEFT = 10
+    MARGIN_RIGHT = 20
+    MARGIN_BOTTOM = 50
 
     def initialize(label)
       @label = label
