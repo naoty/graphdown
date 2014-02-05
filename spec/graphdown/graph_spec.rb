@@ -1,7 +1,6 @@
 require "spec_helper"
 
 describe Graphdown::Graph do
-  let(:fixtures_path) { Pathname.new("spec/fixtures") }
   let(:graph) { Graphdown::Graph.new }
   let(:a) { Graphdown::Node.new("a") }
   let(:b) { Graphdown::Node.new("b") }
@@ -19,12 +18,6 @@ describe Graphdown::Graph do
     it "finds node" do
       node = graph.find_node_by_label("a")
       expect(node).to equal a
-    end
-  end
-
-  describe "#to_svg" do
-    it "generates svg" do
-      expect(graph.to_svg).to eq fixtures_path.join("sample.svg").read
     end
   end
 

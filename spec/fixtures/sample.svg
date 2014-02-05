@@ -9,4 +9,10 @@
     <text x="26" y="122">b</text>
     <text x="26" y="207">c</text>
   </g>
+  <g stroke="black" stroke-width="2">
+    <path d="M 26.5 45 L 26.5 95" fill="none"/>
+    <path d="M 26.5 95 L 31.5 85 L 21.5 85 Z" fill="black"/>
+    <path d="M 26.5 130 L 26.5 180" fill="none"/>
+    <path d="M 26.5 180 L 31.5 170 L 21.5 170 Z" fill="black"/>
+  </g>
 </svg>

@@ -1,5 +1,6 @@
 module Graphdown
   class Node
+    attr_accessor :x, :y
     attr_reader :label, :parent_edges, :child_edges
 
     FONT_SIZE = 18
@@ -12,6 +13,8 @@ module Graphdown
     MARGIN_BOTTOM = 50
 
     def initialize(label)
+      @x = 0
+      @y = 0
       @label = label
       @parent_edges = []
       @child_edges = []
