@@ -5,11 +5,20 @@ describe Graphdown::Parser do
   let(:fixtures_path) { Pathname.new("spec/fixtures") }
 
   describe "#parse" do
-    it "parses text into nodes" do
+    before do
       content = fixtures_path.join("sample.md").read
       parser.parse(content)
+    end
+
+    it "parses text into nodes" do
       labels = parser.graph.nodes.map(&:label)
-      expect(labels).to match_array ["a", "b", "c"]
+      expect(labels).to eq ["a", "b", "c"]
+    end
+
+    it "parses arrows into edges" do
+      edges = parser.graph.nodes.map(&:child_edges).flatten
+      directions = edges.map(&:direction)
+      expect(directions).to eq [:forward, :two_way]
     end
   end
 end

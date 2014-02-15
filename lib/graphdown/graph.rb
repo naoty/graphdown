@@ -92,7 +92,8 @@ module Graphdown
           @nodes.each do |node|
             node.child_edges.each do |edge|
               g.path(d: edge.line_d, fill: "none")
-              g.path(d: edge.arrow_d, fill: "black")
+              g.path(d: edge.arrow_d, fill: "black") if edge.forward?
+              g.path(d: edge.reverse_arrow_d, fill: "black") if edge.backward?
             end
           end
         end

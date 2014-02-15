@@ -3,6 +3,7 @@ require "matrix"
 module Graphdown
   class Edge
     attr_accessor :origin, :target
+    attr_reader :direction
 
     DIRECTION = [:forward, :backward, :two_way].freeze
     ARROW_SIDE_LENGTH = 10
@@ -13,6 +14,14 @@ module Graphdown
       @direction = DIRECTION.include?(direction) ? direction : :forward
       @origin = Point.new
       @target = Point.new
+    end
+
+    def forward?
+      @direction == :forward || @direction == :two_way
+    end
+
+    def backward?
+      @direction == :backward || @direction == :two_way
     end
 
     def parent
@@ -37,8 +46,12 @@ module Graphdown
 
     def arrow_d
       ratio = ARROW_SIDE_LENGTH / length
-      p1 = vector.scale(ratio).rotate(Math::PI / 6 * 5).point
-      p2 = vector.scale(ratio).rotate(-Math::PI / 6 * 5).point
+
+      v1 = Graphdown::Edge::Vector.new(@target.x - @origin.x, @target.y - @origin.y)
+      p1 = v1.scale(ratio).rotate(Math::PI / 6 * 5).point
+
+      v2 = Graphdown::Edge::Vector.new(@target.x - @origin.x, @target.y - @origin.y)
+      p2 = v2.scale(ratio).rotate(-Math::PI / 6 * 5).point
 
       p1.x += @target.x
       p1.y += @target.y
@@ -48,16 +61,29 @@ module Graphdown
       "M #{@target.x} #{@target.y} L #{p1.x} #{p1.y} L #{p2.x} #{p2.y} Z"
     end
 
+    def reverse_arrow_d
+      ratio = ARROW_SIDE_LENGTH / length
+
+      v1 = Graphdown::Edge::Vector.new(@origin.x - @target.x, @origin.y - @target.y)
+      p1 = v1.scale(ratio).rotate(Math::PI / 6 * 5).point
+
+      v2 = Graphdown::Edge::Vector.new(@origin.x - @target.x, @origin.y - @target.y)
+      p2 = v2.scale(ratio).rotate(-Math::PI / 6 * 5).point
+
+      p1.x += @origin.x
+      p1.y += @origin.y
+      p2.x += @origin.x
+      p2.y += @origin.y
+
+      "M #{@origin.x} #{@origin.y} L #{p1.x} #{p1.y} L #{p2.x} #{p2.y} Z"
+    end
+
     private
 
     def length
       dx = @target.x - @origin.x
       dy = @target.y - @origin.y
       Math.sqrt(dx ** 2 + dy ** 2)
-    end
-
-    def vector
-      Graphdown::Edge::Vector.new(@target.x - @origin.x, @target.y - @origin.y)
     end
 
     class Vector

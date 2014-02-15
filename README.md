@@ -35,7 +35,7 @@ Graphdown parses these notations into graph images in SVG format.
 
 ### Examples
 
-```
+```markdown
 # Paths for my project on GitHub
 
 [/] <-> [/naoty] <-> [/naoty/graphdown]
@@ -44,14 +44,14 @@ Graphdown parses these notations into graph images in SVG format.
 [/] <-> [/notifications] -> [/naoty/graphdown]
 ```
 
-```
+```markdown
 # Sign in and Sign out on GitHub
 
 [/] -[POST /logout]-> [/]
 [/] -> [/login] -[POST /session]-> [/]
 ```
 
-```
+```markdown
 # Servers arrangement
 
 [load balancer] -> [web server 1], [web server 2], [web server 3] -> [cache server]
