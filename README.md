@@ -59,3 +59,7 @@ Graphdown parses these notations into graph images in SVG format.
 [web server 2] -> [DB server 2]
 [web server 3] -> [DB server 3]
 ```
+
+## References
+
+- Kazuo Misue, Kouzou Sugiyama, On Automatic Drowing of Compound Graphs for Computer Aided Diagrammatical Thinking, Journal of Information Processing Society of Japan, 1989, Vol.30, No.10, p1324-1334.

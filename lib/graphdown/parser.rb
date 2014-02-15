@@ -29,6 +29,7 @@ module Graphdown
     end
 
     def output
+      @graph.layer_nodes
       @graph.layout_nodes
       @graph.layout_edges
       @graph.to_svg

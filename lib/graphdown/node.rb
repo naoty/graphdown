@@ -1,6 +1,6 @@
 module Graphdown
   class Node
-    attr_accessor :x, :y
+    attr_accessor :x, :y, :level
     attr_reader :label, :parent_edges, :child_edges
 
     FONT_SIZE = 18
@@ -15,6 +15,7 @@ module Graphdown
     def initialize(label)
       @x = 0
       @y = 0
+      @level = 0
       @label = label
       @parent_edges = []
       @child_edges = []
@@ -30,6 +31,8 @@ module Graphdown
     end
 
     def connect(child, direction = :forward)
+      child.level = 1
+
       # Prevent closed path
       direction = ancestors.include?(child) ? :backward : direction
       edge = Edge.new(self, child, direction)

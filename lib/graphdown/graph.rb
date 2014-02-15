@@ -22,7 +22,22 @@ module Graphdown
     end
 
     def layered_nodes
-      @layered_nodes ||= @nodes.group_by { |node| node.ancestors.count }.values
+      @layered_nodes ||= @nodes.sort_by(&:level).group_by(&:level).values
+    end
+
+    def layer_nodes
+      nodes_with_level = @nodes.select { |node| node.level >= 1 }
+      begin
+        diff_total = 0
+        nodes_with_level.each do |node|
+          node.children.each do |child|
+            if node.level >= child.level
+              child.level += node.level + 1
+              diff_total += node.level + 1
+            end
+          end
+        end
+      end while diff_total != 0
     end
 
     def layout_nodes
