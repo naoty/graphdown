@@ -7,24 +7,29 @@ module Graphdown
     end
 
     def parse(text)
-      tokens = text.split(/\s+/)
-      tokens.each_with_index do |token, index|
-        next unless index > 0 && index % 2 == 0
-
-        origin_label = tokens[index - 2].gsub(/\[(.+)\]/) { $1 }
-        origin = @graph.find_node_by_label(origin_label) || Node.new(origin_label)
-
-        target_label = tokens[index].gsub(/\[(.+)\]/) { $1 }
-        target = @graph.find_node_by_label(target_label) || Node.new(target_label)
-
-        case tokens[index - 1]
-        when "->"
-          origin.connect(target)
-        when "<->"
-          origin.connect(target, :two_way)
+      tokens = text.split(/(?<!,)\s+/)
+      2.step(tokens.size, 2) do |n|
+        # origins
+        origin_labels = tokens[n - 2].scan(/(?<=\[).+?(?=\])/)
+        origins = origin_labels.map do |label|
+          @graph.find_node_by_label(label) || Node.new(label)
         end
-        @graph << origin
-        @graph << target
+
+        # targets
+        target_labels = tokens[n].scan(/(?<=\[).+?(?=\])/)
+        targets = target_labels.map do |label|
+          @graph.find_node_by_label(label) || Node.new(label)
+        end
+
+        # edges
+        direction = (tokens[n - 1] == "<->") ? :two_way : :forward
+        origins.each do |origin|
+          @graph << origin
+          targets.each do |target|
+            origin.connect(target, direction)
+            @graph << target
+          end
+        end
       end
     end
 

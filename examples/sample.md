@@ -1,6 +1,16 @@
-# Paths for my project on GitHub
+# Sample 1
 
-[/] <-> [/naoty] <-> [/naoty/graphdown]
-[/] <-> [/naoty/graphdown]
-[/] <-> [/search] -> [/naoty/graphdown]
-[/] <-> [/notifications] -> [/naoty/graphdown]
+[A] -> [C]
+[A] -> [D]
+[B] -> [C]
+[B] -> [E]
+[C] -> [F]
+[D] -> [F]
+[D] -> [G]
+[E] -> [H]
+[E] -> [I]
+
+# Sample 2
+
+[A] -> [B], [C], [D] -> [E]
+[B] -> [F], [G] <-> [H]
