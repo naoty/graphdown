@@ -1,4 +1,6 @@
+require "graphdown/version"
 require "graphdown/renderable"
+require "graphdown/cli"
 require "graphdown/parser"
 require "graphdown/graph"
 require "graphdown/node"
