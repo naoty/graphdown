@@ -1,5 +1,8 @@
-lib = File.dirname(__FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-
-require "redcarpet"
+require "graphdown/version"
 require "graphdown/renderable"
+require "graphdown/cli"
+require "graphdown/parser"
+require "graphdown/graph"
+require "graphdown/node"
+require "graphdown/edge"
+require "graphdown/point"

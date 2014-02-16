@@ -1,17 +1,4 @@
 #!/usr/bin/env ruby
 
-require "pathname"
-require "redcarpet"
 require "graphdown"
-
-class BaseRenderer < Redcarpet::Render::HTML
-  include Graphdown::Renderable
-end
-markdown = Redcarpet::Markdown.new(BaseRenderer, fenced_code_blocks: true)
-
-src = Pathname.new(ARGV[0]).expand_path
-dist = Pathname.new(ARGV[1] || ARGV[0].gsub(/\.md$/) { ".html" }).expand_path
-
-content = src.read
-parsed = markdown.render(content)
-dist.open("wb") { |file| file.write(parsed) }
+Graphdown::CLI.start(ARGV)

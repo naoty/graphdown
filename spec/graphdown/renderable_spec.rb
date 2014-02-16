@@ -1,38 +1,26 @@
 require "spec_helper"
 
-class BaseRenderer < Redcarpet::Render::HTML
-  include Graphdown::Renderable
-end
-
 describe Graphdown::Renderable do
-  let(:markdown) { Redcarpet::Markdown.new(BaseRenderer, fenced_code_blocks: true) }
-  let(:fixtures_path) { Pathname.new("spec/fixtures") }
-  let(:dot_path)      { Pathname.pwd.join("sample.dot") }
-  let(:graph_path)    { Pathname.pwd.join("sample.png") }
+  let(:markdown) do
+    renderer = Class.new(Redcarpet::Render::HTML)
+    renderer.send(:include, Graphdown::Renderable)
+    Redcarpet::Markdown.new(renderer)
+  end
+  let(:fixtures_path) { Pathname.new("./spec/fixtures") }
 
-  context "when the language of block code is dot" do
-    let(:content) { fixtures_path.join("sample.md").read }
-    after do
-      graph_path.delete if graph_path.exist?
-    end
-
-    it "generates img tag" do
+  context "when graph text is passed" do
+    it "generates svg tag" do
+      content = fixtures_path.join("sample.md").read
       html = markdown.render(content)
-      expect(html).to match /<img src="#{graph_path.to_s}"\/>/
-    end
-
-    it "generates graph image file" do
-      markdown.render(content)
-      expect(graph_path).to be_exist
+      expect(html).to match /<svg.+>.+<\/svg>/m
     end
   end
 
-  context "when the language of block code isn't dot" do
-    let(:content) { fixtures_path.join("sample_without_graph.md").read }
-
-    it "generates code tag" do
+  context "when normal text is passed" do
+    it "generates p tag" do
+      content = fixtures_path.join("sample_without_graph.md").read
       html = markdown.render(content)
-      expect(html).to match /<code>.+<\/code>/m
+      expect(html).to match /<p>.+<\/p>/
     end
   end
 end
