@@ -7,7 +7,7 @@ module Graphdown
     end
 
     def parse(text)
-      tokens = text.split(/(?<!,)\s+/)
+      tokens = text.split(/(?<=[\]>])\s+/)
       2.step(tokens.size, 2) do |n|
         # origins
         origin_labels = tokens[n - 2].scan(/(?<=\[).+?(?=\])/)

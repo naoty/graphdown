@@ -39,36 +39,28 @@ Graphdown extends following notations for graphs.
 - `[label A], [label B], ...`: Multiple nodes
 - `->`: Unidirectional edge
 - `<->`: Bidirectional edge
-- `-[edge name]->` or `<-[edge name]->`: Edge named "edge name"
 
 Graphdown parses these notations into graph images in SVG format.
 
 ### Examples
 
-```
-# Paths for my project on GitHub
-
-[/] <-> [/naoty] <-> [/naoty/graphdown]
-[/] <-> [/naoty/graphdown]
-[/] <-> [/search] -> [/naoty/graphdown]
-[/] <-> [/notifications] -> [/naoty/graphdown]
-```
-
-```
-# Sign in and Sign out on GitHub
-
-[/] -[POST /logout]-> [/]
-[/] -> [/login] -[POST /session]-> [/]
-```
-
-```
+<pre>
 # Servers arrangement
 
-[load balancer] -> [web server 1], [web server 2], [web server 3] -> [cache server]
-[web server 1] -> [DB server 1]
-[web server 2] -> [DB server 2]
-[web server 3] -> [DB server 3]
-```
+[Load balancer] -> [Web server 1], [Web server 2], [Web server 3] -> [DB server], [Cache server]
+</pre>
+
+![Servers arrangement](examples/servers_arrangement.png)
+
+<pre>
+# Path to naoty/graphdown on GitHub
+
+[/] -> [/naoty] -> [/naoty/graphdown]
+[/] -> [/search] -> [/naoty/graphdown]
+[/] -> [/notifications] -> [/naoty/graphdown]
+</pre>
+
+![Path to graphdown](examples/path_to_graphdown.png)
 
 ## References
 
